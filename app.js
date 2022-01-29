@@ -9,7 +9,10 @@ const game = {
       (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
   }, 
   getGuess: function() {
-    return `Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`
+   prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`)
   } 
 }
 console.log(game.getGuess())
+// It returns a value that is a NUMBER between smallestnum and biggestnum.
+// Use while loop
+// parseInt returns NAN if string cannot be parsed into number
