@@ -11,6 +11,7 @@ const game = {
       do {
         this.prevGuesses.push(this.getGuess())
         this.render();
+        this.helper();
       } 
       while (this.prevGuesses[this.prevGuesses.length - 1] !== this.secretNum) 
       
@@ -38,6 +39,14 @@ const game = {
     } else {
       alert(`Congrats! You have guessed the number in ${this.prevGuesses.length} tries!`)
     }
-  } 
+  },
+  helper: function() {
+    if (this.prevGuesses[this.prevGuesses.length - 1] > this.secretNum) {
+    game['biggestNum'] = this.prevGuesses[this.prevGuesses.length - 1]
+  }
+   if (this.prevGuesses[this.prevGuesses.length - 1] < this.secretNum) {
+      game['smallestNum'] = this.prevGuesses[this.prevGuesses.length - 1]
+   }
+  }
 }
 game.play()
