@@ -7,12 +7,37 @@ const game = {
   play: function() {
     this.secretNum = Math.floor(Math.random() * 
       (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
+      
+      do {
+        this.prevGuesses.push(this.getGuess())
+        this.render();
+      } 
+      while (this.prevGuesses[this.prevGuesses.length - 1] !== this.secretNum) 
+      
+      return
   }, 
   getGuess: function() {
-   prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`)
+    // let input = parseInt(prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`))
+    // while (isNaN(input) || input > this.biggestNum ||  input < this.smallestNum)   {
+    //   input = parseInt(prompt(`Try again, Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`))
+    // }
+    // return input
+    let guess
+    do {
+      guess = parseInt(prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`))
+    }
+      while (isNaN(guess) || guess > this.biggestNum ||  guess < this.smallestNum)
+      return guess
+  }, 
+
+  render: function() {
+    if (this.prevGuesses[this.prevGuesses.length - 1] > this.secretNum) {
+      alert(`Your guess is too high. Previous guesses: ${this.prevGuesses.join(', ')}`)
+    } else if (this.prevGuesses[this.prevGuesses.length - 1] < this.secretNum) {
+      alert(`You guess is too low. Previous guess: ${this.prevGuesses.join(', ')}`)
+    } else {
+      alert(`Congrats! You have guessed the number in ${this.prevGuesses.length} tries!`)
+    }
   } 
 }
-console.log(game.getGuess())
-// It returns a value that is a NUMBER between smallestnum and biggestnum.
-// Use while loop
-// parseInt returns NAN if string cannot be parsed into number
+game.play()
